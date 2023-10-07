@@ -1,12 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>CookMe</title>
+		<title>Camera Capture</title>
+		<style>
+			/* CSS styles */
+			#capturedPhoto {
+				width: 300px;
+				height: 225px;
+				display: none;
+			}
+		</style>
 	</head>
-
 	<body>
-		<h1>Hello CookMe Participants</h1>
+		<h1>Front Camera Capture</h1>
+		<video id="camera" autoplay></video>
+		<button id="captureButton">Capture Photo</button>
+		<canvas id="photoCanvas" style="display: none"></canvas>
+		<img id="capturedPhoto" src="" alt="Captured Photo" />
+
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				const video = document.getElementById("camera");
+				const captureButton = document.getElementById("captureButton");
+				const photoCanvas = document.getElementById("photoCanvas");
+				const capturedPhoto = document.getElementById("capturedPhoto");
+
+				// Access the user's camera
+				navigator.mediaDevices
+					.getUserMedia({ video: { facingMode: "user" } }) // Use the front camera
+					.then(function (stream) {
+						video.srcObject = stream;
+					})
+					.catch(function (error) {
+						console.error("Error accessing the camera:", error);
+					});
+
+				// Capture photo
+				captureButton.addEventListener("click", function () {
+					const context = photoCanvas.getContext("2d");
+					context.drawImage(video, 0, 0, photoCanvas.width, photoCanvas.height);
+
+					// Display the captured photo
+					capturedPhoto.src = photoCanvas.toDataURL("image/jpeg");
+					capturedPhoto.style.display = "block";
+				});
+			});
+		</script>
 	</body>
 </html>

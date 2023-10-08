@@ -1,9 +1,8 @@
 import openai
 
-def maker(image_path):
+def maker(listr):
   openai.api_key = ("")
-
-  listr = input("Provide the ingredients that you have: ")
+  # listr = input("Provide the ingredients that you have: ")
   list = listr.split()
   string = ', '.join(list)
   response = openai.Completion.create(

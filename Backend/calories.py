@@ -13,7 +13,10 @@ string = ', '.join(list)
 response = openai.Completion.create(
   engine="text-davinci-003",
   prompt=f""""Given a list of these items: {string}
-              onlytell me how long it takes before the product expires, in this format (1 day, 3 months, 2 years, etc)
+              Use the website eatbydate.com to give an estimated expiration date using the current date: {formatted_date} as a guideline.
+              Example: If a product has a shelf life of 3 days, and today is 10/07/2023, it will print out 10/10/2023, depending on what day it is.
+              Do it in mm/dd/yyyy format, but print it out like a python dictionary:
+              [item] [take your time thinking about the expiration date, don't rush it]:mm/dd/yyyy 
               """,
   max_tokens=1024
 )

@@ -1,3 +1,61 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: #dbe8d8;
+  font-family: "Sriracha", cursive;
+  font-weight: 400;
+}
+
+.text-xl.font-extrabold {
+  text-transform: capitalize;
+}
+
+.rounded-lg {
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.flex-col {
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Apply styles to each block */
+.p-2 {
+  display: flex;
+  flex-wrap: wrap;
+}
+.otherthingy {
+  padding: 10px;
+  width: 50%;
+}
+.thingy {
+  border-radius: 20px;
+  background-color: #c8df52;
+  color: #0a7029;
+  padding: 10px;
+  margin-bottom: 5px;
+  width: 100%; /* Set the width to 50% of the viewport width */
+  flex: 0 0 50%; /* Set a fixed width of 50% and don't grow or shrink */
+  text-align: center;
+}
+
+.custom-header {
+  text-align: center; /* Center vertically */
+  background-color: #16a34a;
+  color: white;
+  padding: 10px 20px; /* Optional padding for the header */
+  margin-left: 40%; /* Left margin */
+  margin-right: 40%;
+  border-radius: 100px;
+}
+
+/* Apply styles to the button */
+.recipe-button {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  cursor: pointer;
+}

@@ -25,19 +25,26 @@ export default function Home() {
   const [cameraOpen, setCameraOpen] = useState(false);
   const [recipe, setRecipe] = useState<any>();
   const getRecipe = () => {
-    void fetch("http://127.0.0.1:5000/recipe").catch().then((res) => res.text()).catch().then((body) => setRecipe(JSON.parse(body)))
-  }
+    void fetch("http://127.0.0.1:5000/recipe")
+      .catch()
+      .then((res) => res.text())
+      .catch()
+      .then((body) => setRecipe(JSON.parse(body)));
+  };
   return (
     <>
       <Head>
-        <title>CookMe</title>
+        <title>PEAR</title>
         <meta name="description" content="hackuta 2023" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap"
+          rel="stylesheet"
+        />
         <link rel="icon" href="/favicon.ico" />
+        import {} from "module";
       </Head>
       <main>
-        <div className="flex flex-row p-2">
-          Header
-          <FoodSearch />
+        <div className="flex flex-col p-2">
           <div>
             <Dialog.Root open={cameraOpen} onOpenChange={setCameraOpen}>
               <Dialog.Trigger asChild={true}>
@@ -45,43 +52,60 @@ export default function Home() {
                   type="button"
                   className="rounded-lg bg-green-600 p-2 text-white hover:bg-green-700"
                 >
-                  add with camera
+                  Smart Camera Scan
                 </button>
               </Dialog.Trigger>
               <Dialog.Portal>
                 <Dialog.Overlay className="fixed inset-0 h-screen w-screen bg-black opacity-30" />
                 <Dialog.Content>
                   <div className="fixed left-1/2 top-1/2 h-fit w-fit -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-10">
-                    <CameraWrap
-                      setCameraOpen={setCameraOpen}
-                    />
+                    <CameraWrap setCameraOpen={setCameraOpen} />
                   </div>
                 </Dialog.Content>
               </Dialog.Portal>
             </Dialog.Root>
           </div>
         </div>
-        <div className="p-2">{db.data.map((value) => <FoodItem key={value.barcode} food={value.product} />)}</div>
-        <div>
-          <h1>Recipes</h1>
-          <button type="button" className="" onClick={() => { getRecipe() }}>generate new recipe</button>
-          {recipe && <div>
-            <h1>{recipe[0]}</h1>
-            <div>
-              <h2>Ingredients</h2>
-              {recipe[1].map((val, index) => {
-                return <li key={val}>{val}</li>
-              })}
-            </div>
-            <div>
-              <h2>Instructions</h2>
-              {recipe[2].map((val, index) => {
-                return <li key={val}>{val}</li>
-              })}
-            </div>
-          </div>}
+        <div className="p-2">
+          {db.data.map((value) => (
+            <FoodItem key={value.barcode} food={value.product} />
+          ))}
         </div>
-      </main >
+        <div className="recipe">
+          <header class="custom-header">
+            <div class="header-content">
+              <button
+                type="button"
+                className="text-xl font-extrabold"
+                onClick={() => {
+                  getRecipe();
+                }}
+              >
+                Generate New Recipe
+              </button>
+              <h1>Recipes</h1>
+            </div>
+          </header>
+
+          {recipe && (
+            <div>
+              <h1>{recipe[0]}</h1>
+              <div>
+                <h2>Ingredients</h2>
+                {recipe[1].map((val, index) => {
+                  return <li key={val}>{val}</li>;
+                })}
+              </div>
+              <div>
+                <h2>Instructions</h2>
+                {recipe[2].map((val, index) => {
+                  return <li key={val}>{val}</li>;
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      </main>
     </>
   );
 }
@@ -101,22 +125,19 @@ const FoodSearch = () => {
 const FoodItem = ({ food }: FoodItemProps) => {
   const [expanded, setExpanded] = useState();
   return (
-    <div className="flex flex-col rounded-lg bg-slate-200 p-2">
-      <div>
+    <div className="otherthingy">
+      <div className="thingy">
         <h1 className="text-xl font-extrabold">{food.Name}</h1>
-        <h2 className="text-base">Expires soon</h2>
+        <h2 className="text-base">Expires Soon</h2>
+        Calories Per Serving: {food["Calories per Serving"]}
       </div>
-      <div className="text-lg">
-        Calories per serving: {food["Calories per Serving"]}
-      </div>
-      <div></div>
     </div>
   );
 };
 type CameraProps = {
   setCameraOpen: Dispatch<SetStateAction<boolean>>;
 };
-const CameraWrap = ({ setCameraOpen, }: CameraProps) => {
+const CameraWrap = ({ setCameraOpen }: CameraProps) => {
   const camera = useRef<CameraType>(null);
   const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
   const [activeDevice, setActiveDevice] = useState<string | undefined>(
@@ -174,7 +195,7 @@ const CameraWrap = ({ setCameraOpen, }: CameraProps) => {
         </div>
       </div>
       <div>
-        <h3>Select camera</h3>
+        <h3>Select Camera</h3>
         <select
           onChange={(e) => {
             setActiveDevice(e.target.value);
@@ -188,7 +209,7 @@ const CameraWrap = ({ setCameraOpen, }: CameraProps) => {
         </select>
       </div>
       <button type="button" className="box-content" onClick={onTakePhoto}>
-        take photo
+        Take Photo
       </button>
       <div></div>
     </div>

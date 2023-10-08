@@ -29,12 +29,12 @@ const syncExpiry = () => {
       void fetch("http://127.0.0.1:5000/upload", {
         method: "PUT",
         headers: {
-          "Content-type": "application/json"
+          "Content-type": "application/json",
         },
         body: JSON.stringify({
           db: newData,
         }),
-      });
+      }).then(() => console.log("yuh"));
     });
 };
 
@@ -51,9 +51,10 @@ const sendImage = async (image: string) => {
 
 export default function Home() {
   const [cameraOpen, setCameraOpen] = useState(false);
-  const [recipe, setRecipe] = useState<any>();
+  const [recipe, setRecipe] = useState<any>(undefined);
+  const [recipeOpen, setRecipeOpen] = useState<boolean>(false);
   const getRecipe = () => {
-    void fetch("http://127.0.0.1:5000/recipe")
+    return fetch("http://127.0.0.1:5000/recipe")
       .catch()
       .then((res) => res.text())
       .catch()
@@ -70,22 +71,21 @@ export default function Home() {
           rel="stylesheet"
         />
         <link rel="icon" href="/favicon.ico" />
-        import {} from "module";
+        import { } from "module";
       </Head>
       <main>
         <div className="flex flex-col p-2">
-          <button type="button" onClick={() => { syncExpiry(); setCameraOpen(cameraOpen) }}>
-            expire
-          </button>
           <div>
             <Dialog.Root open={cameraOpen} onOpenChange={setCameraOpen}>
               <Dialog.Trigger asChild={true}>
-                <button
-                  type="button"
-                  className="rounded-lg bg-green-600 p-2 text-white hover:bg-green-700"
-                >
-                  Smart Camera Scan
-                </button>
+                <>
+                  <button
+                    type="button"
+                    className="rounded-lg bg-green-600 p-2 text-white hover:bg-green-700"
+                  >
+                    Smart Camera Scan
+                  </button>
+                </>
               </Dialog.Trigger>
               <Dialog.Portal>
                 <Dialog.Overlay className="fixed inset-0 h-screen w-screen bg-black opacity-30" />
@@ -104,38 +104,61 @@ export default function Home() {
           ))}
         </div>
         <div className="recipe">
-          <header class="custom-header">
-            <div class="header-content">
-              <button
-                type="button"
-                className="text-xl font-extrabold"
-                onClick={() => {
-                  getRecipe();
-                }}
-              >
-                Generate New Recipe
-              </button>
-              <h1>Recipes</h1>
+          <div className="custom-header mb-5 hover:bg-green-700">
+            <button
+              type="button"
+              className=" w-full text-center text-xl font-extrabold text-white"
+              onClick={() => {
+                syncExpiry();
+                setCameraOpen(cameraOpen);
+              }}
+            >
+              Find Expiration dates
+            </button>
+          </div>
+          <header className="custom-header hover:bg-green-700">
+            <div className="header-content ">
+              <Dialog.Root>
+                <Dialog.Trigger>
+                  <button
+                    type="button"
+                    className="text-xl font-extrabold"
+                    onClick={() => {
+                      void getRecipe();
+                      setRecipeOpen(true);
+                    }}
+                  >
+                    Generate New Recipe
+                  </button>
+                </Dialog.Trigger>
+                <Dialog.Portal>
+                  <Dialog.Overlay className="fixed inset-0 h-screen w-screen bg-black opacity-30" />
+                  <Dialog.Content className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-fit">
+                    {recipe && (
+                      <div className="rounded-lg bg-white p-8">
+                        <h1 className="text-2xl w-fit">{recipe[0]}</h1>
+                        <h3 className="text-sm">Calories: {recipe[3]}</h3>
+                        <div>
+                          <h2 className="text-xl">Ingredients</h2>
+                          <ul>
+                            {recipe[1].map((val, index) => {
+                              return <li key={val} className="list-item">{val}</li>;
+                            })}
+                          </ul>
+                        </div>
+                        <div>
+                          <h2 className="text-xl">Instructions</h2>
+                          {recipe[2].map((val, index) => {
+                            return <li key={val} className="list-none">{val}</li>;
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </Dialog.Content>
+                </Dialog.Portal>
+              </Dialog.Root>
             </div>
           </header>
-
-          {recipe && (
-            <div>
-              <h1>{recipe[0]}</h1>
-              <div>
-                <h2>Ingredients</h2>
-                {recipe[1].map((val, index) => {
-                  return <li key={val}>{val}</li>;
-                })}
-              </div>
-              <div>
-                <h2>Instructions</h2>
-                {recipe[2].map((val, index) => {
-                  return <li key={val}>{val}</li>;
-                })}
-              </div>
-            </div>
-          )}
         </div>
       </main>
     </>
@@ -161,7 +184,14 @@ const FoodItem = ({ food }: FoodItemProps) => {
     <div className="otherthingy">
       <div className="thingy">
         <h1 className="text-xl font-extrabold">{food.product.Name}</h1>
-        <h2 className="text-base">Expires in {DateTime.fromISO(food.expiry).diffNow("days").toFormat("d").replace("-", "")} days</h2>
+        <h2 className="text-base">
+          Expires in{" "}
+          {DateTime.fromISO(food.expiry)
+            .diffNow("days")
+            .toFormat("d")
+            .replace("-", "")}{" "}
+          days
+        </h2>
         Calories Per Serving: {food.product["Calories per Serving"]}
       </div>
     </div>

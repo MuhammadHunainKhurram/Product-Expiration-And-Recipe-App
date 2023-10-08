@@ -83,6 +83,138 @@
                 "Cholesterol (g)": "n/a"
             },
             "barcode": "0012000001086"
+        },
+        {
+            "product": {
+                "Name": "Celsius",
+                "Nutrition Score": "N/a",
+                "Ingredient Analysis": [
+                    "palm-oil-content-unknown",
+                    "vegan",
+                    "vegetarian"
+                ],
+                "Allergens": "",
+                "Serving Size": "1",
+                "Calories per Serving": "n/a",
+                "Protein (g)": "n/a",
+                "Fat (g)": "n/a",
+                "Carbs (g)": "n/a",
+                "Sodium (g)": "n/a",
+                "Sugar (g)": "n/a",
+                "Fiber (g)": "n/a",
+                "Cholesterol (g)": "n/a"
+            },
+            "barcode": "0889392010145"
+        },
+        {
+            "product": {
+                "Name": "Clif Bar Energy Bar (Chocolate Chip)",
+                "Nutrition Score": "C",
+                "Ingredient Analysis": [
+                    "palm-oil-free",
+                    "vegan-status-unknown",
+                    "vegetarian-status-unknown"
+                ],
+                "Allergens": "",
+                "Serving Size": "1 bar (68g)",
+                "Calories per Serving": 250,
+                "Protein (g)": 10,
+                "Fat (g)": 6,
+                "Carbs (g)": 43,
+                "Sodium (g)": 0.13,
+                "Sugar (g)": 17,
+                "Fiber (g)": 5,
+                "Cholesterol (g)": 0
+            },
+            "barcode": "0722252100900"
+        },
+        {
+            "product": {
+                "Name": "Cheetos Cheetos Crunchy",
+                "Nutrition Score": "D",
+                "Ingredient Analysis": [
+                    "palm-oil-free",
+                    "non-vegan",
+                    "vegetarian-status-unknown"
+                ],
+                "Allergens": "milk",
+                "Serving Size": "1 package 28.3 g",
+                "Calories per Serving": 160,
+                "Protein (g)": 2,
+                "Fat (g)": 10,
+                "Carbs (g)": 15,
+                "Sodium (g)": 0.25,
+                "Sugar (g)": 1,
+                "Fiber (g)": 1,
+                "Cholesterol (g)": 0
+            },
+            "barcode": "0028400040112"
+        },
+        {
+            "product": {
+                "Name": "Oaklands Banane",
+                "Nutrition Score": "A",
+                "Ingredient Analysis": [
+                    "palm-oil-free",
+                    "vegan",
+                    "vegetarian"
+                ],
+                "Allergens": "",
+                "Serving Size": "n/a",
+                "Calories per Serving": "n/a",
+                "Protein (g)": "n/a",
+                "Fat (g)": "n/a",
+                "Carbs (g)": "n/a",
+                "Sodium (g)": "n/a",
+                "Sugar (g)": "n/a",
+                "Fiber (g)": "n/a",
+                "Cholesterol (g)": "n/a"
+            },
+            "barcode": "20753030"
+        },
+        {
+            "product": {
+                "Name": "Carrefour Bio Carrefour Almond Milk Unsweetened",
+                "Nutrition Score": "B",
+                "Ingredient Analysis": [
+                    "palm-oil-free",
+                    "vegan",
+                    "vegetarian"
+                ],
+                "Allergens": "nuts",
+                "Serving Size": "20g",
+                "Calories per Serving": 5.2,
+                "Protein (g)": 0.14,
+                "Fat (g)": 0.34,
+                "Carbs (g)": 0.34,
+                "Sodium (g)": 0.008,
+                "Sugar (g)": 0.1,
+                "Fiber (g)": 0.1,
+                "Cholesterol (g)": "n/a"
+            },
+            "barcode": "3560071014094"
+        },
+        {
+            "product": {
+                "Name": "Milbona Lidl High Protein Chocolate Flavour Drink",
+                "Nutrition Score": "A",
+                "Ingredient Analysis": [
+                    "palm-oil-content-unknown",
+                    "vegan-status-unknown",
+                    "vegetarian-status-unknown"
+                ],
+                "Allergens": "milk",
+                "Serving Size": "166 ml",
+                "Calories per Serving": 111,
+                "Protein (g)": 17.6,
+                "Fat (g)": 0.498,
+                "Carbs (g)": 8.8,
+                "Sodium (g)": 0.0996,
+                "Sugar (g)": 8.47,
+                "Fiber (g)": 0.664,
+                "Cholesterol (g)": "n/a"
+            },
+            "barcode": "4056489406679"
         }
     ]
 }

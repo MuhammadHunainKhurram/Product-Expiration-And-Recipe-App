@@ -8,8 +8,36 @@ import {
   type Dispatch,
 } from "react";
 import { Camera, type CameraType } from "react-camera-pro";
+import { DateTime } from "luxon";
 
 import db from "../../../Backend/db/data.json";
+
+const syncExpiry = () => {
+  const expiries = fetch("http://127.0.0.1:5000/expire")
+    .catch()
+    .then((res) => res.text())
+    .then((body) => {
+      console.log(body);
+      const arr = JSON.parse(body);
+      const newData = db.data.map((product, index) => {
+        product.expiry = DateTime.fromFormat(
+          (arr[index * 2 + 1] as string).trim(),
+          "MM/dd/yyyy",
+        );
+        return product;
+      });
+      void fetch("http://127.0.0.1:5000/upload", {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+          db: newData,
+        }),
+      });
+    });
+};
+
 const sendImage = async (image: string) => {
   const nutrition = await fetch("http://127.0.0.1:5000/barcode", {
     method: "PUT",
@@ -25,8 +53,13 @@ export default function Home() {
   const [cameraOpen, setCameraOpen] = useState(false);
   const [recipe, setRecipe] = useState<any>();
   const getRecipe = () => {
-    void fetch("http://127.0.0.1:5000/recipe").catch().then((res) => res.text()).catch().then((body) => setRecipe(JSON.parse(body)))
-  }
+    void fetch("http://127.0.0.1:5000/recipe")
+      .catch()
+      .then((res) => res.text())
+      .catch()
+      .then((body) => setRecipe(JSON.parse(body)));
+  };
+  useEffect(() => { }, []);
   return (
     <>
       <Head>
@@ -36,8 +69,9 @@ export default function Home() {
       </Head>
       <main>
         <div className="flex flex-row p-2">
-          Header
-          <FoodSearch />
+          <button type="button" onClick={() => { syncExpiry(); setCameraOpen(cameraOpen) }}>
+            expire
+          </button>
           <div>
             <Dialog.Root open={cameraOpen} onOpenChange={setCameraOpen}>
               <Dialog.Trigger asChild={true}>
@@ -52,36 +86,48 @@ export default function Home() {
                 <Dialog.Overlay className="fixed inset-0 h-screen w-screen bg-black opacity-30" />
                 <Dialog.Content>
                   <div className="fixed left-1/2 top-1/2 h-fit w-fit -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-10">
-                    <CameraWrap
-                      setCameraOpen={setCameraOpen}
-                    />
+                    <CameraWrap setCameraOpen={setCameraOpen} />
                   </div>
                 </Dialog.Content>
               </Dialog.Portal>
             </Dialog.Root>
           </div>
         </div>
-        <div className="p-2">{db.data.map((value) => <FoodItem key={value.barcode} food={value.product} />)}</div>
+        <div className="p-2">
+          {db.data.map((value) => (
+            <FoodItem key={value.barcode} food={value} />
+          ))}
+        </div>
         <div>
           <h1>Recipes</h1>
-          <button type="button" className="" onClick={() => { getRecipe() }}>generate new recipe</button>
-          {recipe && <div>
-            <h1>{recipe[0]}</h1>
+          <button
+            type="button"
+            className=""
+            onClick={() => {
+              getRecipe();
+            }}
+          >
+            generate new recipe
+          </button>
+          {recipe && (
             <div>
-              <h2>Ingredients</h2>
-              {recipe[1].map((val, index) => {
-                return <li key={val}>{val}</li>
-              })}
+              <h1>{recipe[0]}</h1>
+              <div>
+                <h2>Ingredients</h2>
+                {recipe[1].map((val, index) => {
+                  return <li key={val}>{val}</li>;
+                })}
+              </div>
+              <div>
+                <h2>Instructions</h2>
+                {recipe[2].map((val, index) => {
+                  return <li key={val}>{val}</li>;
+                })}
+              </div>
             </div>
-            <div>
-              <h2>Instructions</h2>
-              {recipe[2].map((val, index) => {
-                return <li key={val}>{val}</li>
-              })}
-            </div>
-          </div>}
+          )}
         </div>
-      </main >
+      </main>
     </>
   );
 }
@@ -100,14 +146,15 @@ const FoodSearch = () => {
 
 const FoodItem = ({ food }: FoodItemProps) => {
   const [expanded, setExpanded] = useState();
+  const [date, setDate] = useState("");
   return (
-    <div className="flex flex-col rounded-lg bg-slate-200 p-2">
+    <div className="flex flex-col rounded-lg bg-slate-200 p-2 drop-shadow-md">
       <div>
-        <h1 className="text-xl font-extrabold">{food.Name}</h1>
-        <h2 className="text-base">Expires soon</h2>
+        <h1 className="text-xl font-extrabold">{food.product.Name}</h1>
+        <h2 className="text-base">Expires in {DateTime.fromISO(food.expiry).diffNow("days").toFormat("d").replace("-", "")} days</h2>
       </div>
       <div className="text-lg">
-        Calories per serving: {food["Calories per Serving"]}
+        Calories per serving: {food.product["Calories per Serving"]}
       </div>
       <div></div>
     </div>
@@ -116,7 +163,7 @@ const FoodItem = ({ food }: FoodItemProps) => {
 type CameraProps = {
   setCameraOpen: Dispatch<SetStateAction<boolean>>;
 };
-const CameraWrap = ({ setCameraOpen, }: CameraProps) => {
+const CameraWrap = ({ setCameraOpen }: CameraProps) => {
   const camera = useRef<CameraType>(null);
   const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
   const [activeDevice, setActiveDevice] = useState<string | undefined>(

@@ -17,7 +17,7 @@ def fetch_nutrition(barcode):
             if 'product' in data:
                 # Extract relevant details such as product name, ingredients, etc.
                 info = data['product']
-                name = (info.get('brands', 'n/a') + " " + info.get('product_name', 'n/a')).strip()
+                name = (info.get('brands', 'n/a') + " " + info.get('product_name', 'n/a')).strip().replace(",","")
                 ingredients = [ingredient.replace('en:', '').strip() for ingredient in info.get('ingredients_analysis_tags', [])]
                 allergens = info.get('allergens', 'n/a').replace('en:', '').strip()
                 serving = info.get('serving_size', 'n/a')

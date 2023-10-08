@@ -92,6 +92,18 @@ def get_expiration():
         expirations = expire(product_names)
         
         return json.dumps(expirations)
+@app.route('/upload',methods=['PUT'])
+def set_db():
+    if request.method == 'PUT':
+        newDb = request.json['db']
+        print(newDb)
+        if newDb is not None:
+            with open('Backend/db/data.json', 'r') as db:
+                data = json.load(db)
+        data["data"]=newDb
+        with open('Backend/db/data.json', 'w') as json_file:
+            json.dump(data, json_file, indent=4)
+        return newDb
 
 
 if __name__ == "__main__":

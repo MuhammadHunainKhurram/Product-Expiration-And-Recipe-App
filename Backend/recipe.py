@@ -3,8 +3,7 @@ import openai
 def maker(listr):
   openai.api_key = ("")
   # listr = input("Provide the ingredients that you have: ")
-  list = listr.split()
-  string = ', '.join(list)
+  string = ', '.join(listr)
   response = openai.Completion.create(
     engine="text-davinci-003",
     prompt="Given a list of these items: " + string +

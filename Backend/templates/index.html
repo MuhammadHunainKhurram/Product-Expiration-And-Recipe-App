@@ -1,49 +1,83 @@
+<!-- templates/index.html (HTML and JavaScript for the Client-Side) -->
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Camera Capture</title>
+		<title>Camera App</title>
 		<style>
-			/* CSS styles */
-			#capturedPhoto {
-				width: 300px;
-				height: 225px;
-				display: none;
+			body {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				height: 100vh;
+				margin: 0;
+				background-color: #90ee90; /* Background color (#90EE90) */
+			}
+
+			/* Other CSS styles for buttons, captured image, etc. */
+			/* ... */
+
+			#camera {
+				width: 320px; /* Set the desired width */
+				height: 240px; /* Set the desired height */
+				border: 10px solid #000000; /* Black border (#000000) */
+				border-radius: 5px;
+				margin-bottom: 20px;
 			}
 		</style>
 	</head>
 	<body>
-		<h1>Front Camera Capture</h1>
+		<h1>PEAR</h1>
 		<video id="camera" autoplay></video>
-		<button id="captureButton">Capture Photo</button>
-		<canvas id="photoCanvas" style="display: none"></canvas>
-		<img id="capturedPhoto" src="" alt="Captured Photo" />
-
+		<button id="capture">Capture</button>
+		<div id="imagePath" style="display: none"></div>
 		<script>
-			document.addEventListener("DOMContentLoaded", function () {
-				const video = document.getElementById("camera");
-				const captureButton = document.getElementById("captureButton");
-				const photoCanvas = document.getElementById("photoCanvas");
-				const capturedPhoto = document.getElementById("capturedPhoto");
+			// JavaScript code for capturing and processing the image
+			const video = document.getElementById("camera");
+			const captureButton = document.getElementById("capture");
+			const imagePathElement = document.getElementById("imagePath");
+			const canvas = document.createElement("canvas");
+			canvas.width = 320;
+			canvas.height = 240;
+			const context = canvas.getContext("2d");
 
-				// Access the user's camera
-				navigator.mediaDevices
-					.getUserMedia({ video: { facingMode: "user" } }) // Use the front camera
-					.then(function (stream) {
-						video.srcObject = stream;
-					})
-					.catch(function (error) {
-						console.error("Error accessing the camera:", error);
-					});
-
-				// Capture photo
-				captureButton.addEventListener("click", function () {
-					const context = photoCanvas.getContext("2d");
-					context.drawImage(video, 0, 0, photoCanvas.width, photoCanvas.height);
-
-					// Display the captured photo
-					capturedPhoto.src = photoCanvas.toDataURL("image/jpeg");
-					capturedPhoto.style.display = "block";
+			// Capture video from the front camera
+			navigator.mediaDevices
+				.getUserMedia({ video: { facingMode: "user" } })
+				.then((stream) => {
+					video.srcObject = stream;
+				})
+				.catch((error) => {
+					console.error("Error accessing camera:", error);
 				});
+
+			// Add a click event listener to the capture button
+			captureButton.addEventListener("click", () => {
+				// Draw the current video frame onto the canvas
+				context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+				// Display the image path on the page
+				fetch("/capture", {
+					method: "POST",
+					body: new URLSearchParams({
+						captured_image: canvas.toDataURL("image/jpeg", 0.9),
+					}),
+					headers: {
+						"Content-Type": "application/x-www-form-urlencoded",
+					},
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						console.log(data.result); // Handle the result from the server
+
+						// Display the dynamically generated image path on the page
+						imagePathElement.textContent =
+							"Image Path: " + data.result.image_path;
+						imagePathElement.style.display = "block";
+					})
+					.catch((error) => {
+						console.error("Error:", error);
+					});
 			});
 		</script>
 	</body>

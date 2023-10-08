@@ -63,12 +63,17 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>CookMe</title>
+        <title>PEAR</title>
         <meta name="description" content="hackuta 2023" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap"
+          rel="stylesheet"
+        />
         <link rel="icon" href="/favicon.ico" />
+        import {} from "module";
       </Head>
       <main>
-        <div className="flex flex-row p-2">
+        <div className="flex flex-col p-2">
           <button type="button" onClick={() => { syncExpiry(); setCameraOpen(cameraOpen) }}>
             expire
           </button>
@@ -79,7 +84,7 @@ export default function Home() {
                   type="button"
                   className="rounded-lg bg-green-600 p-2 text-white hover:bg-green-700"
                 >
-                  add with camera
+                  Smart Camera Scan
                 </button>
               </Dialog.Trigger>
               <Dialog.Portal>
@@ -98,17 +103,22 @@ export default function Home() {
             <FoodItem key={value.barcode} food={value} />
           ))}
         </div>
-        <div>
-          <h1>Recipes</h1>
-          <button
-            type="button"
-            className=""
-            onClick={() => {
-              getRecipe();
-            }}
-          >
-            generate new recipe
-          </button>
+        <div className="recipe">
+          <header class="custom-header">
+            <div class="header-content">
+              <button
+                type="button"
+                className="text-xl font-extrabold"
+                onClick={() => {
+                  getRecipe();
+                }}
+              >
+                Generate New Recipe
+              </button>
+              <h1>Recipes</h1>
+            </div>
+          </header>
+
           {recipe && (
             <div>
               <h1>{recipe[0]}</h1>
@@ -148,15 +158,12 @@ const FoodItem = ({ food }: FoodItemProps) => {
   const [expanded, setExpanded] = useState();
   const [date, setDate] = useState("");
   return (
-    <div className="flex flex-col rounded-lg bg-slate-200 p-2 drop-shadow-md">
-      <div>
+    <div className="otherthingy">
+      <div className="thingy">
         <h1 className="text-xl font-extrabold">{food.product.Name}</h1>
         <h2 className="text-base">Expires in {DateTime.fromISO(food.expiry).diffNow("days").toFormat("d").replace("-", "")} days</h2>
+        Calories Per Serving: {food.product["Calories per Serving"]}
       </div>
-      <div className="text-lg">
-        Calories per serving: {food.product["Calories per Serving"]}
-      </div>
-      <div></div>
     </div>
   );
 };
@@ -221,7 +228,7 @@ const CameraWrap = ({ setCameraOpen }: CameraProps) => {
         </div>
       </div>
       <div>
-        <h3>Select camera</h3>
+        <h3>Select Camera</h3>
         <select
           onChange={(e) => {
             setActiveDevice(e.target.value);
@@ -235,7 +242,7 @@ const CameraWrap = ({ setCameraOpen }: CameraProps) => {
         </select>
       </div>
       <button type="button" className="box-content" onClick={onTakePhoto}>
-        take photo
+        Take Photo
       </button>
       <div></div>
     </div>

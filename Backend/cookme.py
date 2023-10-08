@@ -48,9 +48,9 @@ def get_food():
         return nutrition
     
 # takes list of items and returns recipes
-@app.route('/recipe', methods=['PUT'])
+@app.route('/recipe', methods=['GET'])
 def get_recipe():
-    if request.method == 'PUT':
+    if request.method == 'GET':
     
         with open('Backend/db/data.json', 'r') as db:
             data = json.load(db)
@@ -58,7 +58,7 @@ def get_recipe():
         product_names = [entry['product']['Name'] for entry in data['data']]
         recipe = maker(product_names)
         
-        return recipe
+        return str(recipe)
 
 
 if __name__ == "__main__":

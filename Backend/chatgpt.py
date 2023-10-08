@@ -1,6 +1,6 @@
 import openai
 
-openai.api_key = ("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")
+openai.api_key = ("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")
 
 listr = input("Provide the ingredients that you have: ")
 list = listr.split()
@@ -11,12 +11,20 @@ response = openai.Completion.create(
             """. Please provide me a possible recipes. 
             The very first line you should print should be the >Recipe Title<, so don't include ingredients.
             NOTE: You don't need to use all of the items listed below, but the more items used, the better.
-            Use this format below for displaying the recipes:
+            Use this format below for displaying the recipes, and number every instruction:
             Recipe Title:
-
             Ingredients:
-
-            Instructions in Numerical Order:""",
-  max_tokens=100
+            Instructions:""",
+  max_tokens=1024
 )
-print(response.choices[0].text.strip())
+chatgpt_response = response.choices[0].text.strip()
+split = chatgpt_response.split(':')
+
+titlesplit = split[1].strip()
+ingredientsplit = split[2].strip()
+instructions = split[3].strip()
+
+title = titlesplit.split('\nIngredients')
+ingredients = ingredientsplit.split('\nInstructions')
+
+print(f"{title[0]}\n\n{ingredients[0]}\n\n{instructions}\n")

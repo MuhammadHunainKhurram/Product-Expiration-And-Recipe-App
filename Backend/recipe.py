@@ -1,7 +1,7 @@
 import openai
 
 def maker(listr):
-  openai.api_key = ("")
+  openai.api_key = ("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")
   # listr = input("Provide the ingredients that you have: ")
   string = ', '.join(listr)
   response = openai.Completion.create(
@@ -32,9 +32,9 @@ def maker(listr):
   carbsplit = split[6].strip()
   fat = split[7].strip()
 
-  title = titlesplit.split('\nIngredients')
-  ingredients = ingredientsplit.split('\nInstructions')
-  instructions = instructionsplit.split('\nCalories')[0]
+  title = titlesplit.split('\nIngredients')[0]
+  ingredients = ingredientsplit.split('\nInstructions')[0].split("\n")
+  instructions = instructionsplit.split('\nCalories')[0].split("\n")
   calorie = caloriesplit.split('\nProtein')[0]
   protein = proteinsplit.split('\nCarbs')[0]
   carbs = carbsplit.split('\nFat')[0]

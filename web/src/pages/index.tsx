@@ -29,7 +29,7 @@ export default function Home() {
                 <Dialog.Overlay className="fixed bg-black opacity-30 w-screen h-screen inset-0" />
                 <Dialog.Content>
                   <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-10 rounded-md w-fit h-fit">
-                    <CameraWrap />
+                    <CameraWrap setCameraOpen={setCameraOpen} />
                   </div>
                 </Dialog.Content>
               </ Dialog.Portal>

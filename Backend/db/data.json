@@ -109,6 +109,68 @@
                 "Cholesterol (g)": 0
             },
             "barcode": "0038000311314"
+        },
+        {
+            "product": {
+                "Name": "Gatorade Orange Thirst Quencher",
+                "Nutrition Score": "D",
+                "Ingredient Analysis": [
+                    "palm-oil-free",
+                    "vegan-status-unknown",
+                    "vegetarian-status-unknown"
+                ],
+                "Allergens": "",
+                "Serving Size": "1 BOTTLE (360 ml)",
+                "Calories per Serving": 80,
+                "Protein (g)": 0,
+                "Fat (g)": 0,
+                "Carbs (g)": 22,
+                "Sodium (g)": 0.16,
+                "Sugar (g)": 21,
+                "Fiber (g)": "n/a",
+                "Cholesterol (g)": "n/a"
+            },
+            "barcode": "0052000122480"
+        },
+        {
+            "product": {
+                "Name": "Kar's",
+                "Nutrition Score": "D",
+                "Ingredient Analysis": [
+                    "palm-oil",
+                    "non-vegan",
+                    "vegetarian-status-unknown"
+                ],
+                "Allergens": "peanuts",
+                "Serving Size": "1 PACKAGE (57 g)",
+                "Calories per Serving": 270,
+                "Protein (g)": 8,
+                "Fat (g)": 18,
+                "Carbs (g)": 27,
+                "Sodium (g)": 0.125,
+                "Sugar (g)": 20,
+                "Fiber (g)": 3,
+                "Cholesterol (g)": 0
+            },
+            "barcode": "0077034009873"
+        },
+        {
+            "product": {
+                "Name": "Aquafina Water",
+                "Nutrition Score": "N/a",
+                "Ingredient Analysis": [],
+                "Allergens": "",
+                "Serving Size": "n/a",
+                "Calories per Serving": "n/a",
+                "Protein (g)": "n/a",
+                "Fat (g)": "n/a",
+                "Carbs (g)": "n/a",
+                "Sodium (g)": "n/a",
+                "Sugar (g)": "n/a",
+                "Fiber (g)": "n/a",
+                "Cholesterol (g)": "n/a"
+            },
+            "barcode": "0012000001086"
         }
     ]
 }

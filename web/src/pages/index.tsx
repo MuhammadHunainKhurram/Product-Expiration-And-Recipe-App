@@ -1,6 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import Head from "next/head";
-import Link from "next/link";
 import {
   type SetStateAction,
   useEffect,
@@ -10,6 +9,7 @@ import {
 } from "react";
 import { Camera, type CameraType } from "react-camera-pro";
 
+import db from "../../../Backend/db/data.json";
 const sendImage = async (image: string) => {
   const nutrition = await fetch("http://127.0.0.1:5000/barcode", {
     method: "PUT",
@@ -18,10 +18,12 @@ const sendImage = async (image: string) => {
     },
     body: JSON.stringify({ image: image }),
   });
+  return nutrition;
 };
 
 export default function Home() {
   const [cameraOpen, setCameraOpen] = useState(false);
+  const [stuff, setStuff] = useState<Array<Food>>([]);
   return (
     <>
       <Head>
@@ -47,34 +49,23 @@ export default function Home() {
                 <Dialog.Overlay className="fixed inset-0 h-screen w-screen bg-black opacity-30" />
                 <Dialog.Content>
                   <div className="fixed left-1/2 top-1/2 h-fit w-fit -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-10">
-                    <CameraWrap setCameraOpen={setCameraOpen} />
+                    <CameraWrap
+                      setCameraOpen={setCameraOpen}
+                      food={stuff}
+                      setFood={setStuff}
+                    />
                   </div>
                 </Dialog.Content>
               </Dialog.Portal>
             </Dialog.Root>
           </div>
         </div>
-        <div className="p-2">
-          <FoodItem
-            food={{
-              name: "Gerble - sesame cookie",
-              ingredients: ["Farine de ble"],
-              energy: 54,
-            }}
-          />
-        </div>
-      </main>
+        <div className="p-2">{db.data.map((value) => <FoodItem key={value.barcode} food={value.product} />)}</div>
+      </main >
     </>
   );
 }
-type Food = {
-  energy: number;
-  ingredients: Array<string>;
-  name: string;
-  nova?: number;
-  expiry?: number;
-};
-
+type Food = any;
 type FoodItemProps = {
   food: Food;
 };
@@ -92,20 +83,22 @@ const FoodItem = ({ food }: FoodItemProps) => {
   return (
     <div className="flex flex-col rounded-lg bg-slate-200 p-2">
       <div>
-        <h1 className="text-xl font-extrabold">{food.name}</h1>
+        <h1 className="text-xl font-extrabold">{food.Name}</h1>
         <h2 className="text-base">Expires soon</h2>
       </div>
-      <div className="text-lg">Calories per serving: {food.energy}</div>
-      <div>
-        <h2 className="text-lg">Ingredients</h2>
+      <div className="text-lg">
+        Calories per serving: {food["Calories Per Serving"]}
       </div>
+      <div></div>
     </div>
   );
 };
 type CameraProps = {
   setCameraOpen: Dispatch<SetStateAction<boolean>>;
+  food: Array<Food>;
+  setFood: Dispatch<SetStateAction<Array<Food>>>;
 };
-const CameraWrap = ({ setCameraOpen }: CameraProps) => {
+const CameraWrap = ({ setCameraOpen, food, setFood }: CameraProps) => {
   const camera = useRef<CameraType>(null);
   const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
   const [activeDevice, setActiveDevice] = useState<string | undefined>(
@@ -119,26 +112,48 @@ const CameraWrap = ({ setCameraOpen }: CameraProps) => {
       setDevices(videoDevices);
     })();
   });
+  const onTakePhoto = () => {
+    const photo = camera.current?.takePhoto();
+    if (photo) {
+      setImage(photo);
+      void sendImage(photo)
+        .catch((reason) => {
+          console.error(reason);
+        })
+        .then((value) => {
+          if (value) {
+            console.log(value);
+            setCameraOpen(false);
+          }
+        });
+    }
+  };
   return (
     <div className="flex flex-col">
       <button className="box-content" onClick={() => setCameraOpen(false)}>
         close
       </button>
-      <div className="container relative h-[30rem] w-[30rem]">
-        <Camera
-          ref={camera}
-          aspectRatio={"cover"}
-          videoSourceDeviceId={activeDevice}
-          errorMessages={{
-            noCameraAccessible:
-              "No camera device accessible. Please connect your camera or try a different browser.",
-            permissionDenied:
-              "Permission denied. Please refresh and give camera permission.",
-            switchCamera:
-              "It is not possible to switch camera to different one because there is only one video device accessible.",
-            canvas: "Canvas is not supported.",
-          }}
-        />
+      <div className="relative">
+        <div
+          className="absolute left-0 top-0 z-50 h-[480px] w-[480px] bg-contain"
+          style={{ backgroundImage: `url(${image})` }}
+        ></div>
+        <div className="container relative h-[30rem] w-[30rem]">
+          <Camera
+            ref={camera}
+            aspectRatio={"cover"}
+            videoSourceDeviceId={activeDevice}
+            errorMessages={{
+              noCameraAccessible:
+                "No camera device accessible. Please connect your camera or try a different browser.",
+              permissionDenied:
+                "Permission denied. Please refresh and give camera permission.",
+              switchCamera:
+                "It is not possible to switch camera to different one because there is only one video device accessible.",
+              canvas: "Canvas is not supported.",
+            }}
+          />
+        </div>
       </div>
       <div>
         <h3>Select camera</h3>
@@ -154,30 +169,10 @@ const CameraWrap = ({ setCameraOpen }: CameraProps) => {
           ))}
         </select>
       </div>
-      <button
-        type="button"
-        className="box-content"
-        onClick={() => {
-          const photo = camera.current?.takePhoto();
-          if (photo) {
-            void sendImage(photo)
-              .catch((reason) => {
-                console.error(reason);
-              })
-              .then((value) => {
-                console.log(value);
-              });
-          }
-        }}
-      >
+      <button type="button" className="box-content" onClick={onTakePhoto}>
         take photo
       </button>
-      <div>
-        <div
-          className="h-[120px] w-[120px] bg-contain"
-          style={{ backgroundImage: `url(${image})` }}
-        ></div>
-      </div>
+      <div></div>
     </div>
   );
 };

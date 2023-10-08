@@ -1,7 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import Head from "next/head";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { type SetStateAction, useEffect, useRef, useState, type Dispatch } from "react";
 import { Camera, type CameraType } from "react-camera-pro";
 
 
@@ -29,7 +29,6 @@ export default function Home() {
                 <Dialog.Overlay className="fixed bg-black opacity-30 w-screen h-screen inset-0" />
                 <Dialog.Content>
                   <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-10 rounded-md w-fit h-fit">
-                    <button className="box-content" onClick={() => setCameraOpen(false)}>close</button>
                     <CameraWrap />
                   </div>
                 </Dialog.Content>
@@ -79,7 +78,10 @@ const FoodItem = ({ food }: FoodItemProps) => {
 
 
 }
-const CameraWrap = () => {
+type CameraProps = {
+  setCameraOpen: Dispatch<SetStateAction<boolean>>
+}
+const CameraWrap = ({ setCameraOpen }: CameraProps) => {
   const camera = useRef<CameraType>(null);
   const [devices, setDevices] = useState<MediaDeviceInfo[]>([])
   const [activeDevice, setActiveDevice] = useState<string | undefined>(undefined)
@@ -92,6 +94,7 @@ const CameraWrap = () => {
     })();
   });
   return <div className="flex flex-col">
+    <button className="box-content" onClick={() => setCameraOpen(false)}>close</button>
     <div className="container h-[30rem] w-[30rem] relative">
       <Camera ref={camera} aspectRatio={"cover"} videoSourceDeviceId={activeDevice} errorMessages={{
         noCameraAccessible: 'No camera device accessible. Please connect your camera or try a different browser.',

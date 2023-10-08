@@ -1,7 +1,10 @@
+from barcode_reader import read_barcode
+from nutrition import fetch_nutrition
 from flask import Flask, render_template, request, redirect, url_for
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -20,6 +23,14 @@ def save_ingredient():
             print(f"Received photo: {photo_filename}")
         
     return redirect(url_for('index'))
+
+@app.route('/barcode',methods=['PUT'])
+def get_food():
+    if request.method == 'GET':
+        barcode = read_barcode(request.form['image'])
+        return fetch_nutrition(barcode) 
+        
+
 
 if __name__ == "__main__":
     app.run(debug=True)

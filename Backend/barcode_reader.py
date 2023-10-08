@@ -5,8 +5,8 @@ from pyzbar.pyzbar import decode
 
 def read_barcode(image_path):
     # Read the image with barcode
-    image = cv2.imread(image_path)
-
+    imageIO = BytesIO(image_data)
+    image = Image.open(image)
     # Decode barcode
     barcode = decode(image)
 

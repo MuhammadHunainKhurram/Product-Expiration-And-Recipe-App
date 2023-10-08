@@ -1,7 +1,8 @@
 import openai
+import os
 
 def maker(listr):
-  openai.api_key = ("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")
+  openai.api_key = (os.environ["OPENAI_KEY"])
   # listr = input("Provide the ingredients that you have: ")
   string = ', '.join(listr)
   response = openai.Completion.create(

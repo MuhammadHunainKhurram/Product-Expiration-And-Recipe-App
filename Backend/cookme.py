@@ -59,7 +59,7 @@ def get_recipe():
         product_names = [entry['product']['Name'] for entry in data['data']]
         recipe = maker(product_names)
         
-        return str(recipe)
+        return json.dumps(recipe)
 
 
 # takes list of items and returns expirations

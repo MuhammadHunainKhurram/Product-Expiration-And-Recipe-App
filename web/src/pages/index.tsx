@@ -11,9 +11,8 @@ import {
 import { Camera, type CameraType } from "react-camera-pro";
 
 const sendImage = async (image: string) => {
-  const nutrition = await fetch("http://localho.st:5000/barcode", {
+  const nutrition = await fetch("http://127.0.0.1:5000/barcode", {
     method: "PUT",
-    mode: "cors",
     headers: {
       "Content-type": "application/json",
     },

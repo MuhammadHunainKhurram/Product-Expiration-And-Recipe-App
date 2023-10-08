@@ -1,6 +1,7 @@
 from barcode_reader import read_barcode
 from nutrition import fetch_nutrition
 from recipe import maker
+from expire import expire
 from flask import Flask, render_template, request, redirect, url_for
 from flask_cors import CORS, cross_origin
 import json
@@ -59,6 +60,20 @@ def get_recipe():
         recipe = maker(product_names)
         
         return str(recipe)
+
+
+# takes list of items and returns expirations
+@app.route('/expire', methods=['GET'])
+def get_expiration():
+    if request.method == 'GET':
+    
+        with open('Backend/db/data.json', 'r') as db:
+            data = json.load(db)
+
+        product_names = [entry['product']['Name'] for entry in data['data']]
+        expirations = expire(product_names)
+        
+        return str(expirations)
 
 
 if __name__ == "__main__":

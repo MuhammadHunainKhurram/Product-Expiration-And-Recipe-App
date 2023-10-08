@@ -1,7 +1,7 @@
 import openai
 
 def maker(image_path):
-  openai.api_key = ("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")
+  openai.api_key = ("")
 
   listr = input("Provide the ingredients that you have: ")
   list = listr.split()

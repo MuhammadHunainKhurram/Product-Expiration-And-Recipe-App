@@ -2,6 +2,7 @@ from barcode_reader import read_barcode
 from nutrition import fetch_nutrition
 from flask import Flask, render_template, request, redirect, url_for
 from flask_cors import CORS, cross_origin
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -33,7 +34,17 @@ def save_ingredient():
 def get_food():
     if request.method == 'PUT':
         barcode = read_barcode(request.json['image'])
-        return fetch_nutrition(barcode)
+        nutrition = fetch_nutrition(barcode)
+
+        # store info on db
+        if nutrition is not None:
+            with open('Backend/db/data.json', 'r') as db:
+                data = json.load(db)
+        data["data"].append({"product": nutrition, "barcode": barcode})
+        with open('Backend/db/data.json', 'w') as json_file:
+            json.dump(data, json_file, indent=4)
+        
+        return nutrition
 
 
 if __name__ == "__main__":

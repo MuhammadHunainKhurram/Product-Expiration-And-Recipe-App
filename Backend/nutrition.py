@@ -47,12 +47,11 @@ def fetch_nutrition(barcode):
                     'Cholesterol (g)': chol
                 }
             else:
-                return {'error': 'Product information not found.'}
+                return None
         else:
-            return {'error': 'Error fetching product information from the API.'}
+            return None
     except Exception as e:
-        return {'error': f'An error occurred: {str(e)}'}
-
+        return None
 
 def main():
     barcode = '3045140105502'
@@ -79,3 +78,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -87,7 +87,7 @@ const FoodItem = ({ food }: FoodItemProps) => {
         <h2 className="text-base">Expires soon</h2>
       </div>
       <div className="text-lg">
-        Calories per serving: {food["Calories Per Serving"]}
+        Calories per serving: {food["Calories per Serving"]}
       </div>
       <div></div>
     </div>

@@ -60,9 +60,9 @@ def get_nut():
         if nutrition is not None:
             with open('Backend/db/data.json', 'r') as db:
                 data = json.load(db)
-        data["data"].append({"product": nutrition, "barcode": barcode})
-        with open('Backend/db/data.json', 'w') as json_file:
-            json.dump(data, json_file, indent=4)
+            data["data"].append({"product": nutrition, "barcode": barcode})
+            with open('Backend/db/data.json', 'w') as json_file:
+                json.dump(data, json_file, indent=4)
         
         return nutrition
 

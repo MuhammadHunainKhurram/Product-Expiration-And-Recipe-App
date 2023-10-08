@@ -2,117 +2,6 @@
     "data": [
         {
             "product": {
-                "Name": "Kellogg's Poptarts brown sugar cinnamon single",
-                "Nutrition Score": "D",
-                "Ingredient Analysis": [
-                    "palm-oil",
-                    "non-vegan",
-                    "non-vegetarian"
-                ],
-                "Allergens": "gluten,soybeans",
-                "Serving Size": "1 Pouch (100 g)",
-                "Calories per Serving": 420,
-                "Protein (g)": 4,
-                "Fat (g)": 14,
-                "Carbs (g)": 70,
-                "Sodium (g)": 0.346,
-                "Sugar (g)": 31,
-                "Fiber (g)": 1,
-                "Cholesterol (g)": 0
-            },
-            "barcode": "0038000311314",
-            "expiry": "2024-09-30T00:00:00.000-05:00"
-        },
-        {
-            "product": {
-                "Name": "Gatorade Orange Thirst Quencher",
-                "Nutrition Score": "D",
-                "Ingredient Analysis": [
-                    "palm-oil-free",
-                    "vegan-status-unknown",
-                    "vegetarian-status-unknown"
-                ],
-                "Allergens": "",
-                "Serving Size": "1 BOTTLE (360 ml)",
-                "Calories per Serving": 80,
-                "Protein (g)": 0,
-                "Fat (g)": 0,
-                "Carbs (g)": 22,
-                "Sodium (g)": 0.16,
-                "Sugar (g)": 21,
-                "Fiber (g)": "n/a",
-                "Cholesterol (g)": "n/a"
-            },
-            "barcode": "0052000122480",
-            "expiry": "2024-05-31T00:00:00.000-05:00"
-        },
-        {
-            "product": {
-                "Name": "Kar's",
-                "Nutrition Score": "D",
-                "Ingredient Analysis": [
-                    "palm-oil",
-                    "non-vegan",
-                    "vegetarian-status-unknown"
-                ],
-                "Allergens": "peanuts",
-                "Serving Size": "1 PACKAGE (57 g)",
-                "Calories per Serving": 270,
-                "Protein (g)": 8,
-                "Fat (g)": 18,
-                "Carbs (g)": 27,
-                "Sodium (g)": 0.125,
-                "Sugar (g)": 20,
-                "Fiber (g)": 3,
-                "Cholesterol (g)": 0
-            },
-            "barcode": "0077034009873",
-            "expiry": "2024-07-31T00:00:00.000-05:00"
-        },
-        {
-            "product": {
-                "Name": "Aquafina Water",
-                "Nutrition Score": "N/a",
-                "Ingredient Analysis": [],
-                "Allergens": "",
-                "Serving Size": "n/a",
-                "Calories per Serving": "n/a",
-                "Protein (g)": "n/a",
-                "Fat (g)": "n/a",
-                "Carbs (g)": "n/a",
-                "Sodium (g)": "n/a",
-                "Sugar (g)": "n/a",
-                "Fiber (g)": "n/a",
-                "Cholesterol (g)": "n/a"
-            },
-            "barcode": "0012000001086",
-            "expiry": "2024-06-01T00:00:00.000-05:00"
-        },
-        {
-            "product": {
-                "Name": "Celsius",
-                "Nutrition Score": "N/a",
-                "Ingredient Analysis": [
-                    "palm-oil-content-unknown",
-                    "vegan",
-                    "vegetarian"
-                ],
-                "Allergens": "",
-                "Serving Size": "1",
-                "Calories per Serving": "n/a",
-                "Protein (g)": "n/a",
-                "Fat (g)": "n/a",
-                "Carbs (g)": "n/a",
-                "Sodium (g)": "n/a",
-                "Sugar (g)": "n/a",
-                "Fiber (g)": "n/a",
-                "Cholesterol (g)": "n/a"
-            },
-            "barcode": "0889392010145",
-            "expiry": "2023-12-01T00:00:00.000-06:00"
-        },
-        {
-            "product": {
                 "Name": "Clif Bar Energy Bar (Chocolate Chip)",
                 "Nutrition Score": "C",
                 "Ingredient Analysis": [
@@ -132,30 +21,7 @@
                 "Cholesterol (g)": 0
             },
             "barcode": "0722252100900",
-            "expiry": "2024-05-31T00:00:00.000-05:00"
-        },
-        {
-            "product": {
-                "Name": "Cheetos Cheetos Crunchy",
-                "Nutrition Score": "D",
-                "Ingredient Analysis": [
-                    "palm-oil-free",
-                    "non-vegan",
-                    "vegetarian-status-unknown"
-                ],
-                "Allergens": "milk",
-                "Serving Size": "1 package 28.3 g",
-                "Calories per Serving": 160,
-                "Protein (g)": 2,
-                "Fat (g)": 10,
-                "Carbs (g)": 15,
-                "Sodium (g)": 0.25,
-                "Sugar (g)": 1,
-                "Fiber (g)": 1,
-                "Cholesterol (g)": 0
-            },
-            "barcode": "0028400040112",
-            "expiry": "2023-11-30T00:00:00.000-06:00"
+            "expiry": "2023-10-15T00:00:00.000-05:00"
         },
         {
             "product": {
@@ -178,7 +44,7 @@
                 "Cholesterol (g)": "n/a"
             },
             "barcode": "20753030",
-            "expiry": "2024-08-31T00:00:00.000-05:00"
+            "expiry": "2023-10-14T00:00:00.000-05:00"
         },
         {
             "product": {
@@ -201,7 +67,7 @@
                 "Cholesterol (g)": "n/a"
             },
             "barcode": "3560071014094",
-            "expiry": "2023-10-31T00:00:00.000-05:00"
+            "expiry": "2023-10-18T00:00:00.000-05:00"
         },
         {
             "product": {
@@ -224,7 +90,91 @@
                 "Cholesterol (g)": "n/a"
             },
             "barcode": "4056489406679",
-            "expiry": "2023-07-31T00:00:00.000-05:00"
+            "expiry": "2023-10-20T00:00:00.000-05:00"
+        },
+        {
+            "product": {
+                "Name": "Friendly farms Vanilla Greek Lowfat Yogurt",
+                "Nutrition Score": "Unknown",
+                "Ingredient Analysis": [],
+                "Allergens": "",
+                "Serving Size": "170.0g",
+                "Calories per Serving": 90,
+                "Protein (g)": 14,
+                "Fat (g)": 2,
+                "Carbs (g)": 4,
+                "Sodium (g)": "n/a",
+                "Sugar (g)": 2,
+                "Fiber (g)": 0,
+                "Cholesterol (g)": "n/a"
+            },
+            "barcode": "4099100247923",
+            "expiry": "2023-10-14T00:00:00.000-05:00"
+        },
+        {
+            "product": {
+                "Name": "n/a Hiney butter biscuit",
+                "Nutrition Score": "N/a",
+                "Ingredient Analysis": [],
+                "Allergens": "",
+                "Serving Size": "n/a",
+                "Calories per Serving": "n/a",
+                "Protein (g)": "n/a",
+                "Fat (g)": "n/a",
+                "Carbs (g)": "n/a",
+                "Sodium (g)": "n/a",
+                "Sugar (g)": "n/a",
+                "Fiber (g)": "n/a",
+                "Cholesterol (g)": "n/a"
+            },
+            "barcode": "0077013011354",
+            "expiry": "2023-10-10T00:00:00.000-05:00"
+        },
+        {
+            "product": {
+                "Name": "Granny Apples",
+                "Nutrition Score": "A",
+                "Ingredient Analysis": [
+                    "palm-oil-content-unknown",
+                    "vegan-status-unknown",
+                    "vegetarian-status-unknown"
+                ],
+                "Allergens": "",
+                "Serving Size": "90 g (1 gourde)",
+                "Calories per Serving": "n/a",
+                "Protein (g)": "n/a",
+                "Fat (g)": "n/a",
+                "Carbs (g)": "n/a",
+                "Sodium (g)": "n/a",
+                "Sugar (g)": "n/a",
+                "Fiber (g)": "n/a",
+                "Cholesterol (g)": "n/a"
+            },
+            "barcode": "3021762412129",
+            "expiry": "2023-10-18T00:00:00.000-05:00"
+        },
+        {
+            "product": {
+                "Name": "Sch\u00e4r Seeded Loaf (Bread)",
+                "Nutrition Score": "B",
+                "Ingredient Analysis": [
+                    "palm-oil-free",
+                    "non-vegan",
+                    "vegetarian-status-unknown"
+                ],
+                "Allergens": "soybeans",
+                "Serving Size": "25g",
+                "Calories per Serving": 62.3,
+                "Protein (g)": 1.12,
+                "Fat (g)": 1.65,
+                "Carbs (g)": 9.5,
+                "Sodium (g)": 0.097,
+                "Sugar (g)": 1.02,
+                "Fiber (g)": 2.48,
+                "Cholesterol (g)": "n/a"
+            },
+            "barcode": " 8008698007389",
+            "expiry": "2023-10-13T00:00:00.000-05:00"
         }
     ]
 }

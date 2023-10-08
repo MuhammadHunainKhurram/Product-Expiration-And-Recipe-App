@@ -23,7 +23,10 @@ const sendImage = async (image: string) => {
 
 export default function Home() {
   const [cameraOpen, setCameraOpen] = useState(false);
-  const [stuff, setStuff] = useState<Array<Food>>([]);
+  const [recipe, setRecipe] = useState<any>();
+  const getRecipe = () => {
+    void fetch("http://127.0.0.1:5000/recipe").catch().then((res) => res.text()).catch().then((body) => setRecipe(JSON.parse(body)))
+  }
   return (
     <>
       <Head>
@@ -51,8 +54,6 @@ export default function Home() {
                   <div className="fixed left-1/2 top-1/2 h-fit w-fit -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-10">
                     <CameraWrap
                       setCameraOpen={setCameraOpen}
-                      food={stuff}
-                      setFood={setStuff}
                     />
                   </div>
                 </Dialog.Content>
@@ -61,6 +62,25 @@ export default function Home() {
           </div>
         </div>
         <div className="p-2">{db.data.map((value) => <FoodItem key={value.barcode} food={value.product} />)}</div>
+        <div>
+          <h1>Recipes</h1>
+          <button type="button" className="" onClick={() => { getRecipe() }}>generate new recipe</button>
+          {recipe && <div>
+            <h1>{recipe[0]}</h1>
+            <div>
+              <h2>Ingredients</h2>
+              {recipe[1].map((val, index) => {
+                return <li key={val}>{val}</li>
+              })}
+            </div>
+            <div>
+              <h2>Instructions</h2>
+              {recipe[2].map((val, index) => {
+                return <li key={val}>{val}</li>
+              })}
+            </div>
+          </div>}
+        </div>
       </main >
     </>
   );
@@ -95,10 +115,8 @@ const FoodItem = ({ food }: FoodItemProps) => {
 };
 type CameraProps = {
   setCameraOpen: Dispatch<SetStateAction<boolean>>;
-  food: Array<Food>;
-  setFood: Dispatch<SetStateAction<Array<Food>>>;
 };
-const CameraWrap = ({ setCameraOpen, food, setFood }: CameraProps) => {
+const CameraWrap = ({ setCameraOpen, }: CameraProps) => {
   const camera = useRef<CameraType>(null);
   const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
   const [activeDevice, setActiveDevice] = useState<string | undefined>(

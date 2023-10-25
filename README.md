@@ -1,4 +1,4 @@
-GitHub Repo: https://github.com/jacky0ussef/hackUTA23
+GitHub Repo: https://github.com/MuhammadHunainKhurram/HackUTA23
 
 P.E.A.R. (Product Expiration And Recipes) 
 

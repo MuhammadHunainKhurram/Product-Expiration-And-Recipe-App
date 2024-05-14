@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/uploads/cookme.py"
+    }
+  ],
+  "functions": {
+    "api": {
+      "runtime": "vercel-python@0.5.1",
+      "memory": 128
+    }
+  }
+}

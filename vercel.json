@@ -1,9 +1,15 @@
 {
   "version": 2,
+  "builds": [
+    {
+      "src": "./Backend/cookme.py",
+      "use": "@vercel/python"
+    }
+  ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/uploads/cookme.py"
+      "dest": "/Backend/cookme.py"
     }
-  ],
+  ]
 }

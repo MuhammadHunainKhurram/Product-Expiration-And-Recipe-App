@@ -1,35 +1,79 @@
-GitHub Repo: https://github.com/MuhammadHunainKhurram/HackUTA23
+# P.E.A.R. (Product Expiration And Recipes)
 
-P.E.A.R. (Product Expiration And Recipes) 
+GitHub Repo: [P.E.A.R. - Product Expiration And Recipes](https://github.com/MuhammadHunainKhurram/HackUTA23)
 
-Inspiration: 
-Our app was created with the understanding that college students and individuals with busy schedules often struggle to manage their groceries efficiently, leading to food waste and financial losses.
+## <a name="tech-stack">Tech Stack</a>
 
-What it does: 
-Our app scans and tracks your groceries, provides estimated expiration dates, and even suggests recipes based on what you've purchased, helping you make the most of your ingredients. Additionally, users can access detailed nutritional information, including calorie counts, protein, carbohydrate, and fat content for the recipes provided, contributing to healthier and more informed eating choices. Users can also see allergen warnings and a nutritional score. The app also sends timely alerts for items nearing their expiration date, ensuring nothing goes to waste.
+- React
+- Flask
+- Python
+- OpenAI API
+- Open Food Facts API
+- cv2 (OpenCV)
+- pyzbar
+- HTML
+- CSS
 
-How we built it:
-We used a dynamic technology stack. On the front-end, React, CSS, and HTML were employed to craft a responsive and visually appealing user interface. Flask and Python formed the robust backend, while Python libraries cv2 and pyzbar facilitated barcode scanning. Our app was further enriched with AI capabilities through OpenAI's API, enabling features like recipe suggestions, recipe nutritional information, and expirations. Additionally, the integration of Open Food Facts' API helped us with a comprehensive database of food product details, crucial for accurate macro tracking, allergen warnings, and industry nutritional scoring.
+## <a name="features">🔋 Features</a>
 
-Challenges we ran into:
-Ensuring that the app provides accurate nutritional information for recipes and products requires access to reliable databases and rigorous data validation. Selecting and integrating the right API required time. Making sure the estimated expiration date was accurate was another challenge we faced. 
+- **Barcode Scanning**: Easily track groceries by scanning barcodes for accurate details.  
+- **Expiration Alerts**: Get timely notifications for items nearing their expiration date.  
+- **Recipe Suggestions**: Generate recipes based on purchased ingredients, enriched with AI-powered suggestions.  
+- **Nutritional Information**: Detailed data on calories, protein, carbs, fats, allergen warnings, and nutritional scores.  
+- **Sustainability Contributions**: Helps reduce food waste by promoting efficient grocery management and informed eating.
 
-Accomplishments that we are proud of:
-Python integration of multiple APIs within the same web application, desktop/mobile camera usability, expiration date and recipe features. Successfully integrating multiple APIs, such as Open Food Facts and OpenAI within the same web application, posed challenges, but we are proud of how we harnessed these APIs to enhance the app's functionality and data accuracy.
-We take pride in the positive environmental impact of our app. By helping users reduce food waste and provide nutritional education, we contribute to a more sustainable and eco-friendly world.
+## <a name="quick-start">🤸 Quick Start</a>
 
-What we learned:
-We learned multiple new technical and soft skills by working on a real-world coding challenge, we improved our problem-solving abilities by tackling complex issues under time constraints and developed effective teamwork and communication skills while collaborating with each other. We also learned how to employ AI APIs and incorporate them into a project with other APIs.
+Follow these steps to set up the project locally on your machine.
 
-What is next for PEAR:
-PEAR plans to expand its features, such as meal planning, calorie and macro counting, and shopping list synchronization to further improve users' grocery management and food safety. Continuously refining the recipe suggestion algorithm based on user feedback and preferences will be a priority, along with personalized dietary recommendations. PEAR will continue to provide the most accurate and updated macro and nutritional information.
+### **Prerequisites**
 
-Key Features:
-Barcode scanning for easy grocery tracking.
-Accurate expiration date estimation.
-Recipe suggestions based on purchased items.
-Nutritional information for informed choices.
+Ensure you have the following installed on your machine:
 
-Contributions:
-Promoting sustainability by reducing food waste.
-Enhancing customer well-being through better grocery management.
+- [Git](https://git-scm.com/)
+- [Python](https://www.python.org/)
+- [Node.js](https://nodejs.org/en)
+
+### **Cloning the Repository**
+
+```bash
+git clone https://github.com/MuhammadHunainKhurram/HackUTA23.git
+cd HackUTA23
+```
+
+### **Installation**
+
+Install the required dependencies for the backend and frontend:
+
+#### Backend Setup
+```bash
+cd backend
+pip install -r requirements.txt
+```
+
+#### Frontend Setup
+```bash
+cd frontend
+npm install
+```
+
+### **Running the Project**
+
+#### Start the Backend
+```bash
+cd backend
+python app.py
+```
+
+#### Start the Frontend
+```bash
+cd frontend
+npm start
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
+
+## <a name="contributions">🌍 Contributions</a>
+
+- **Promoting Sustainability**: Helps users reduce food waste with expiration tracking and recipe suggestions.
+- **Enhancing Health and Well-being**: Provides nutritional insights for informed food choices.
